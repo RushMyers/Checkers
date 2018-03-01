@@ -2,13 +2,297 @@
   <head>
   <title>Checkers</title>
   <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src='script.js'></script>
   </head>
   <body>
+    <div class='container text-center'>
+      <div class='page-header'>
+        <h1>Checkers</h1>
+      </div>
+    </div>
+    <div class="game">
+      <div class="board card">
+        <div id='1' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+        <div id='2' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+        <div id='3' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+        <div id='4' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+        <div id='5' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+        <div id='6' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+        <div id='7' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+        <div id='0' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+
+        <div id='0' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+        <div id='1' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+        <div id='2' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+        <div id='3' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+        <div id='4' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+        <div id='5' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+        <div id='6' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+        <div id='7' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+
+        <div id='1' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+        <div id='2' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+        <div id='3' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+        <div id='4' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+        <div id='5' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+        <div id='6' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+        <div id='7' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+        <div id='0' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="red" />
+          </svg>
+        </div>
+
+        <div id='0' class="tile dark"></div>
+        <div id='1' class="tile light"></div>
+        <div id='2' class="tile dark"></div>
+        <div id='3' class="tile light"></div>
+        <div id='4' class="tile dark"></div>
+        <div id='5' class="tile light"></div>
+        <div id='6' class="tile dark"></div>
+        <div id='7' class="tile light"></div>
+
+        <div id='1' class="tile light"></div>
+        <div id='2' class="tile dark"></div>
+        <div id='3' class="tile light"></div>
+        <div id='4' class="tile dark"></div>
+        <div id='5' class="tile light"></div>
+        <div id='6' class="tile dark"></div>
+        <div id='7' class="tile light"></div>
+        <div id='0' class="tile dark"></div>
+
+        <div id='0' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+        <div id='1' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+        <div id='2' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+        <div id='3' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+        <div id='4' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+        <div id='5' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+        <div id='6' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+        <div id='7' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+
+        <div id='1' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+        <div id='2' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+        <div id='3' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+        <div id='4' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+        <div id='5' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+        <div id='6' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+        <div id='7' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+        <div id='0' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+
+        <div id='0' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+        <div id='1' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+        <div id='2' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+        <div id='3' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+        <div id='4' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+        <div id='5' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+        <div id='6' class="tile dark">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+        <div id='7' class="tile light">
+          <svg height="100" width="100">
+            <circle cx="28" cy="28" r="23" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+        </div>
+      </div>
+      <div class="score-card card">
+        <ul class="list-group">
+          <li class="list-group-item">P1:
+            <spanclass="score">0</span>
+          </li>
+          <li class="list-group-item">P2:
+            <spanclass="score">0</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    </div>
+
 
   </body>
 </html>

@@ -1,0 +1,50 @@
+body {
+  font-family: 'PT Sans', sans-serif !important;
+  color: #001011;
+}
+
+div.game {
+  margin: 0 auto;
+  height: 800px;
+  width: 800px;
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+div.score-card {
+  font-size: 20px;
+  box-shadow: 1px 1px 1px 1px black;
+  border-radius: 2%;
+}
+span.score {
+  float: right;
+  margin-left: 4px;
+ }
+div.board {
+  height: 475px;
+  width: 475px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-left: 30px;
+  background-color: #F5E6E8;
+  box-shadow: 2px 2px;
+  border: 10px solid #F5E6E8;
+
+}
+div.tile.dark {
+  width: 12%;
+  height: 12%;
+  border-radius: 15%;
+  background-color: #2E282A;
+  margin: auto;
+}
+div.tile.light {
+  width: 12%;
+  height: 12%;
+  border-radius: 15%;
+  background-color: #B2A198;
+  margin: auto;
+}
