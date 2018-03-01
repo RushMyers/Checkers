@@ -30,7 +30,11 @@ function setBoard() {
           $('.board').append("<div class='tile dark white' id="+tileNo+"></div>");
           tiles[tileNo] = [i, j];
           tileNo++;
-        } else if(j%2 === 1){
+        } else if(j%2 === 1 && column == 1){
+            $('.board').append("<div class='tile dark red' id="+tileNo+"></div>");
+            tiles[tileNo] = [i, j];
+            tileNo++;
+        } else if(j%2 ===1){
             $('.board').append("<div class='tile dark' id="+tileNo+"></div>");
             tiles[tileNo] = [i, j];
             tileNo++;
@@ -44,15 +48,18 @@ function setBoard() {
             $('.board').append("<div class='tile dark white' id="+tileNo+"></div>");
             tiles[tileNo] = [i, j];
             tileNo++;
+          } else if(j%2===0 && column === 1) {
+              $('.board').append("<div class='tile dark red' id="+tileNo+"></div>");
+              tiles[tileNo] = [i, j];
+              tileNo++;
           } else if(j%2===0) {
-            $('.board').append("<div class='tile dark' id="+tileNo+"></div>");
-            tiles[tileNo] = [i, j];
-            tileNo++;
-          }
-          else if(j%2 === 1){
-            $('.board').append("<div class='tile light' id="+tileNo+"></div>");
-            tiles[tileNo] = [i, j];
-            tileNo++;
+              $('.board').append("<div class='tile dark' id="+tileNo+"></div>");
+              tiles[tileNo] = [i, j];
+              tileNo++;
+          } else if(j%2 === 1){
+              $('.board').append("<div class='tile light' id="+tileNo+"></div>");
+              tiles[tileNo] = [i, j];
+              tileNo++;
           }
       }
     });
