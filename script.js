@@ -5,9 +5,16 @@ $(document).ready(function(){
   //   let tile = event.currentTarget;
   //   if((tile.classList.contains('red') && game.turn === 'player1') ||
   //      (tile.classList.contains('white') && game.turn === 'player2')) {
-  //       Checker.selectChecker(tile);
+  //       checkers[].selectChecker(tile);
   //   }
   // });
+  $('.checker').click(function(event){
+    let checker = event.currentTarget;
+    let tile = event.currentTarget.parentElement;
+    console.log(tiles[tile.id]);
+    $('div.isSelected').removeClass('.isSelected');
+    checker.classList.add('isSelected');
+  })
 });
 
 var tiles = [];
@@ -18,7 +25,7 @@ function Checker(color, position) {
   this.player = '';
   this.color === 'red' ? this.player = 'player1' : this.player = 'player2';
   this.position = position;
-  this.selectChecker = function(checker) {
+  this.selectChecker = function() {
     console.log(checker);
     tile.classList.add('isSelected');
   }
