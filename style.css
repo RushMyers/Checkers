@@ -1,0 +1,75 @@
+body {
+  font-family: 'PT Sans', sans-serif !important;
+  color: #001011;
+}
+
+div.game {
+  margin: 0 auto;
+  height: 800px;
+  width: 800px;
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+div.score-card {
+  font-size: 20px;
+  box-shadow: 1px 1px 1px 1px black;
+  border-radius: 2%;
+}
+span.score {
+  float: right;
+  margin-left: 4px;
+ }
+div.board {
+  height: 475px;
+  width: 475px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-left: 30px;
+  background-color: #F5E6E8;
+  box-shadow: 3px 4px 3px;
+  border: 10px solid #F5E6E8;
+
+}
+div.tile.dark {
+  width: 12%;
+  height: 12%;
+  border-radius: 15%;
+  background-color: #2E282A;
+  margin: auto;
+}
+div.tile.light {
+  width: 12%;
+  height: 12%;
+  border-radius: 15%;
+  background-color: #B2A198;
+  margin: auto;
+}
+.white-checker {
+  height: 88%;
+  width: 88%;
+  margin: 6% auto;
+  background: #004777;
+  border: 1px solid black;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  box-shadow: 1px 1px 2px 0;
+}
+.red-checker {
+  height: 88%;
+  width: 88%;
+  margin: 6% auto;
+  background: #A30000;
+  border: 1px solid black;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  box-shadow: 1px 1px 2px 0;
+}
+.isSelected {
+  box-shadow: 1px 1px 10px 0 #FF7700;
+}
