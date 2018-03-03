@@ -1,21 +1,69 @@
 $(document).ready(function(){
   gameBoard.create();
+  gameBoard.setCheckers();
 
-  // $('.tile').click(function(event){
-  //   let tile = event.currentTarget;
-  //   if((tile.classList.contains('red') && game.turn === 'player1') ||
-  //      (tile.classList.contains('white') && game.turn === 'player2')) {
-  //       checkers[].selectChecker(tile);
-  //   }
-  // });
-  $('.checker').click(function(event){
-    let checker = event.currentTarget;
-    let tile = event.currentTarget.parentElement;
-    console.log(tiles[tile.id]);
-    $('div.isSelected').removeClass('.isSelected');
-    checker.classList.add('isSelected');
-  })
+  $('div').on("click", 'div.checker', function(event){
+    console.log('token selected');
+    let checkerElements = Array.from(document.getElementsByClassName('checker'));
+    let checkerElement = event.currentTarget;
+    let checker = checkers[checkerElement.id]
+    if (game.currentPlayer === checker.player) {  // make sure checker belongs to player
+      checkerElements.forEach(function(checker) { // only one checker can be selected at a time
+        checker.classList.remove('isSelected');
+      });
+      checkerElement.classList.add('isSelected');
+    }
+  });
+
+  $('.tile').click(function(event){
+    if($('.isSelected').length != 0) {
+      let selectedChecker = checkers[$('.isSelected').attr('id')];
+      if(isLegalMove(tiles[event.currentTarget.id], selectedChecker)){
+        makeMove(event.currentTarget, selectedChecker, $('.isSelected').attr('id'))
+      }
+    }
+  });
 });
+  function makeMove(newTile, checker, checkerId){
+    console.log('make move', newTile, checker, $('.isSelected').parent());
+    console.log(checkerId);
+    if(checker.color === 'red'){
+      $('.isSelected').parent().removeClass('red').empty();
+      checker.position = tiles[newTile.id];
+      let $redChecker = document.createElement('div');
+      $redChecker.classList.add('checker', 'red-checker');
+      $redChecker.setAttribute('id', checkerId);
+      // newTile.classList.add('red');
+      // newTile.appendChild($redChecker);
+      $(newTile).addClass('red').append($redChecker);
+      game.changeTurns();
+    } else if (checker.color === 'white'){
+      $('.isSelected').parent().removeClass('white').empty();
+      checker.position = tiles[newTile.id];
+      let $whiteChecker = document.createElement('div');
+      $whiteChecker.classList.add('checker', 'white-checker');
+      $whiteChecker.setAttribute('id', checkerId);
+      newTile.classList.add('white');
+      newTile.appendChild($whiteChecker);
+      game.changeTurns();
+    }
+  }
+  function isLegalMove(tile, checker){
+    if(checker.player === 'player1'){
+      if(checker.position[0] > tile[0] &&
+         ((checker.position[1] === tile[1] + 1) ||
+          checker.position[1] === tile[1] -1)) {
+          return true;
+      }
+    } else if(checker.player === 'player2'){
+        if(checker.position[0] < tile[0] &&
+          ((checker.position[1] === tile[1] + 1) ||
+           checker.position[1] === tile[1] -1)) {
+            return true;
+          } else return false;
+      }
+  }
+
 
 var tiles = [];
 var checkers = [];
@@ -25,10 +73,6 @@ function Checker(color, position) {
   this.player = '';
   this.color === 'red' ? this.player = 'player1' : this.player = 'player2';
   this.position = position;
-  this.selectChecker = function() {
-    console.log(checker);
-    tile.classList.add('isSelected');
-  }
 }
 
 var gameBoard = {
@@ -98,15 +142,22 @@ var gameBoard = {
     let $redChecker = $("<div/>").addClass("checker red-checker");
     $('.white').append($whiteChecker);
     $('.red').append($redChecker);
+  },
+  setCheckers: function() {
+    let checkers = Array.from(document.getElementsByClassName('checker'));
+    checkers.forEach(function(checker, i){
+      checker.setAttribute('id', i);
+    });
   }
 }
 
 var game = {
   player1Score: 0,
   player2Score: 0,
-  turn: 'player1',
+  currentPlayer: 'player1',
   changeTurns: function(){
-    console.log('change turns');
+    this.currentPlayer === 'player1' ? this.currentPlayer = 'player2'
+      : this.currentPlayer = 'player1';
   }
 }
 
