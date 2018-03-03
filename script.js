@@ -1,9 +1,9 @@
 $(document).ready(function(){
   gameBoard.create();
   gameBoard.setCheckers();
-  });
 
-  $('.checker').click(function(event){
+  $('div').on("click", 'div.checker', function(event){
+    console.log('token selected');
     let checkerElements = Array.from(document.getElementsByClassName('checker'));
     let checkerElement = event.currentTarget;
     let checker = checkers[checkerElement.id]
@@ -23,6 +23,7 @@ $(document).ready(function(){
       }
     }
   });
+});
   function makeMove(newTile, checker, checkerId){
     console.log('make move', newTile, checker, $('.isSelected').parent());
     console.log(checkerId);
@@ -32,8 +33,9 @@ $(document).ready(function(){
       let $redChecker = document.createElement('div');
       $redChecker.classList.add('checker', 'red-checker');
       $redChecker.setAttribute('id', checkerId);
-      newTile.classList.add('red');
-      newTile.appendChild($redChecker);
+      // newTile.classList.add('red');
+      // newTile.appendChild($redChecker);
+      $(newTile).addClass('red').append($redChecker);
       game.changeTurns();
     } else if (checker.color === 'white'){
       $('.isSelected').parent().removeClass('white').empty();
