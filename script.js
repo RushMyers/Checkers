@@ -43,27 +43,25 @@ function Checker(color, position) {
     let checkerId = $('.isSelected').data('id');
     let tileId = tiles.indexOf(tile);
     let jumpedCheckerIndex = this.getJumpedCheckerIndex(tile);
-    var spotOnBoard = GameBoard.board[this.position[0]][this.position[1]];
     GameBoard.removeChecker(checkers[jumpedCheckerIndex]);
     Game.scorePoint(this.player);
     $("[data-id=" + jumpedCheckerIndex + "]").remove();
     if(this.player === 'player1'){
-      spotOnBoard = 0;
+      GameBoard.board[this.position[0]][this.position[1]] = 0;
       this.position = tile;
-      spotOnBoard = 1;
+      GameBoard.board[this.position[0]][this.position[1]] = 1;
       $('.isSelected').parent().removeClass('red').empty();
       let $newChecker = $('<div/>').addClass('checker red-checker').attr('data-id', checkerId);
       $("#"+tileId +"").append($newChecker);
     } else {
-        spotOnBoard = 0;
+        GameBoard.board[this.position[0]][this.position[1]] = 0;
         this.position = tile;
-        spotOnBoard = 2;
+        GameBoard.board[this.position[0]][this.position[1]] = 2;
         $('.isSelected').parent().removeClass('white').empty();
         let $newChecker = $('<div/>').addClass('checker white-checker').attr('data-id', checkerId);
         $("#"+tileId +"").append($newChecker);
       }
     Game.changeTurns();
-    console.log(GameBoard.board);
   };
   this.makeMove = function(newTile, checkerId) {
     if(this.color === 'red'){
@@ -86,7 +84,6 @@ function Checker(color, position) {
       $(newTile).addClass('white').append($whiteChecker);
       Game.changeTurns();
     }
-  console.log(GameBoard.board);
   };
   this.canJumpTo = function(tile) {
     let x = this.position[1]
@@ -95,7 +92,7 @@ function Checker(color, position) {
       if((GameBoard.hasEnemy([y-1, x-1]) && y-2 === tile[0] &&
           x-2 === tile[1]) || ((GameBoard.hasEnemy([y-1, x+1]) &&
             y-2 === tile[0] && x+2 === tile[1]))) {
-              return true
+              return true;
       }
     } else if(this.player === 'player2'){
           if((GameBoard.hasEnemy([y+1, x-1]) && y+2 === tile[0] &&
@@ -226,6 +223,6 @@ var GameBoard = {
     } else return this.board[position[0]][position[1]] === 1;
   },
   removeChecker: function(checker){
-    GameBoard.board[checker.position[0]][4] = 0;
+    GameBoard.board[checker.position[0]][checker.position[1]] = 0;
   }
 }
