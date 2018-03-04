@@ -14,6 +14,10 @@ $(document).ready(function(){
   });
 
   $('.tile').click(function selectTile(event){ //select tile on which to place checker
+    if (Game.isGameOver()) {
+      return;
+    };
+
     let selectedChecker = checkers[$('.isSelected').data('id')];
     let tile = tiles[event.currentTarget.id];
 
@@ -41,7 +45,7 @@ function Checker(color, position) {
     this.king = true;
   };
 
-  this.jump = function(tile){
+  this.jump = function (tile) {
     let checkerId = $('.isSelected').data('id');
     let tileId = tiles.indexOf(tile);
     let jumpedCheckerIndex = this.getJumpedCheckerIndex(tile);
@@ -76,6 +80,7 @@ function Checker(color, position) {
 
         $(`#${tileId}`).append($newChecker);
       }
+    Game.checkForWin();
     Game.changeTurns();
   };
 
@@ -153,6 +158,19 @@ var Game = {
   player1Score: 0,
   player2Score: 0,
   currentPlayer: 'player1',
+  winner: null,
+
+  isGameOver: function() {
+    return this.winner ? true : false;
+  },
+
+  checkForWin: function() {
+    if (this.player1Score === 12) {
+      this.winner = 'player1';
+    } else if (this.player2Score === 12) {
+      this.winner = 'player2';
+    }
+  },
 
   changeTurns: function(){
     this.currentPlayer === 'player1' ? this.currentPlayer = 'player2'
@@ -162,7 +180,8 @@ var Game = {
   scorePoint: function(player){
     player === 'player1' ? this.player1Score ++ : this.player2Score ++ ;
   }
-}
+};
+
 var GameBoard = {
   board: [
     [ 0, 2, 0, 2, 0, 2, 0, 2],
