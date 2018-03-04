@@ -45,6 +45,14 @@ function Checker(color, position) {
     this.king = true;
   };
 
+  this.canBeKing = function() {
+    if (this.position[0] === 0 || this.position[0] === 7) {
+      return true;
+    }
+
+    return false;
+  }
+
   this.jump = function (tile) {
     let checkerId = $('.isSelected').data('id');
     let tileId = tiles.indexOf(tile);
@@ -54,7 +62,7 @@ function Checker(color, position) {
     Game.scorePoint(this.player);
     $("[data-id=" + jumpedCheckerIndex + "]").remove();
 
-    if(this.player === 'player1'){
+    if (this.player === 'player1') {
       GameBoard.board[this.position[0]][this.position[1]] = 0;
       this.position = tile;
       GameBoard.board[this.position[0]][this.position[1]] = 1;
@@ -80,6 +88,10 @@ function Checker(color, position) {
 
         $(`#${tileId}`).append($newChecker);
       }
+
+    if (this.canBeKing()) {
+      this.makeKing()
+      };
     Game.checkForWin();
     Game.changeTurns();
   };
@@ -97,7 +109,6 @@ function Checker(color, position) {
 
       $(newTile).addClass('red').append($redChecker);
 
-      Game.changeTurns();
     } else if (this.color === 'white') {
       GameBoard.board[this.position[0]][this.position[1]] = 0;
       $('.isSelected').parent().removeClass('white').empty();
@@ -110,8 +121,13 @@ function Checker(color, position) {
 
       $(newTile).addClass('white').append($whiteChecker);
 
-      Game.changeTurns();
     }
+
+    if (this.canBeKing()) {
+      this.makeKing()
+      };
+    Game.changeTurns();
+
   };
 
   this.canJumpTo = function(tile) {
@@ -149,8 +165,7 @@ function Checker(color, position) {
         return checkerIndex;
       }
     }
-
-  }
+  };
 
 };
 
