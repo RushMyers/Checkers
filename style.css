@@ -1,11 +1,20 @@
 body {
-  font-family: 'PT Sans', sans-serif !important;
+  font-family: 'Open Sans', sans-serif;
   color: #001011;
 }
-
+.container{
+  margin: .5em 0 0 27em;
+}
+h1 {
+  font-size: 4.3rem;
+  font-family: 'Crimson Text', serif;
+}
+.table {
+  width: initial;
+}
 div.game {
   margin: 0 auto;
-  height: 800px;
+  height: 550px;
   width: 800px;
   display: flex !important;
   flex-direction: row;
@@ -13,25 +22,27 @@ div.game {
   justify-content: space-around;
 }
 div.score-card {
-  font-size: 20px;
+/*  font-size: 20px;
   box-shadow: 1px 1px 1px 1px black;
-  border-radius: 2%;
+  border-radius: 2%;*/
+  /*font-size: 2rem;*/
+  /*margin: 1rem;*/
 }
 span.score {
   float: right;
   margin-left: 4px;
  }
 div.board {
-  height: 475px;
-  width: 475px;
+  height: 500px;
+  width: 500px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
   margin-left: 30px;
-  background-color: #F5E6E8;
+  background-color: #F9DBBD;
   box-shadow: 3px 4px 3px;
-  border: 10px solid #F5E6E8;
+  border: 1rem solid #F9DBBD;
 
 }
 div.tile.dark {
@@ -72,4 +83,9 @@ div.tile.light {
 }
 .isSelected {
   box-shadow: 1px 1px 10px 0 #FF7700;
+}
+footer {
+  text-align: right;
+  margin: 0 2em 0 2em;
+  font-size:14px;
 }
