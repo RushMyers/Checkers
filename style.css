@@ -84,6 +84,15 @@ div.tile.light {
 .isSelected {
   box-shadow: 1px 1px 10px 0 #FF7700;
 }
+.checker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.checker .king {
+  font-size: 2em;
+  color: cornflowerblue;
+}
 footer {
   text-align: right;
   margin: 0 2em 0 2em;

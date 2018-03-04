@@ -43,8 +43,9 @@ function Checker(color, position) {
 
   this.makeKing = function() {
     this.king = true;
-    const $checkerElement = $('.isSelected');
-    $checkerElement.append("<i class='fas fa-chess-king'></i>");
+    // const $checkerElement = $('.isSelected');
+    // $checkerElement.append("<i class='fas fa-chess-king'></i>");
+    // this.addKingElement($checkerElement);
   };
 
   this.canBeKing = function() {
@@ -55,6 +56,14 @@ function Checker(color, position) {
     return false;
   }
 
+  this.addKingElement = function(checkerElement) {
+    if (checkerElement.has('.fa-chess-king').length) {
+      return;
+    }
+
+    checkerElement.append("<i class='fas fa-chess-king king'></i>");
+  },
+
   this.jump = function (tile) {
     let checkerId = $('.isSelected').data('id');
     let tileId = tiles.indexOf(tile);
@@ -64,6 +73,8 @@ function Checker(color, position) {
     Game.scorePoint(this.player);
     $("[data-id=" + jumpedCheckerIndex + "]").remove();
 
+    let $newChecker;
+
     if (this.player === 'player1') {
       GameBoard.board[this.position[0]][this.position[1]] = 0;
       this.position = tile;
@@ -71,7 +82,7 @@ function Checker(color, position) {
 
       $('.isSelected').parent().removeClass('red').empty();
 
-      let $newChecker = $('<div/>');
+      $newChecker = $('<div/>');
       $newChecker.addClass('checker red-checker')
                  .attr('data-id', checkerId);
 
@@ -84,7 +95,7 @@ function Checker(color, position) {
 
         $('.isSelected').parent().removeClass('white').empty();
 
-        let $newChecker = $('<div/>');
+        $newChecker = $('<div/>');
         $newChecker.addClass('checker white-checker')
                    .attr('data-id', checkerId);
 
@@ -92,24 +103,32 @@ function Checker(color, position) {
       }
 
     if (this.canBeKing()) {
-      this.makeKing()
-      };
+      this.makeKing();
+      this.addKingElement($newChecker);
+    };
+
+    if (this.king) {
+      this.addKingElement($newChecker);
+    }
+
     Game.checkForWin();
     Game.changeTurns();
   };
 
   this.makeMove = function(newTile, checkerId) {
+    let $newChecker;
+
     if (this.color === 'red') {
       GameBoard.board[this.position[0]][this.position[1]] = 0;
       $('.isSelected').parent().removeClass('red').empty();
       this.position = tiles[newTile.id]; //update position of checker
       GameBoard.board[this.position[0]][this.position[1]] = 1;
 
-      let $redChecker = $('<div/>');
-      $redChecker.addClass('checker red-checker')
+      $newChecker = $('<div/>');
+      $newChecker.addClass('checker red-checker')
                  .attr('data-id', checkerId);
 
-      $(newTile).addClass('red').append($redChecker);
+      $(newTile).addClass('red').append($newChecker);
 
     } else if (this.color === 'white') {
       GameBoard.board[this.position[0]][this.position[1]] = 0;
@@ -117,17 +136,23 @@ function Checker(color, position) {
       this.position = tiles[newTile.id];
       GameBoard.board[this.position[0]][this.position[1]] = 2;
 
-      let $whiteChecker = $('<div/>');
-      $whiteChecker.addClass('checker white-checker')
+      $newChecker = $('<div/>');
+      $newChecker.addClass('checker white-checker')
                    .attr('data-id', checkerId);
 
-      $(newTile).addClass('white').append($whiteChecker);
+      $(newTile).addClass('white').append($newChecker);
 
     }
 
     if (this.canBeKing()) {
-      this.makeKing()
-      };
+      this.makeKing();
+      this.addKingElement($newChecker);
+    };
+
+    if (this.king) {
+      this.addKingElement($newChecker);
+    }
+
     Game.changeTurns();
 
   };
@@ -135,6 +160,10 @@ function Checker(color, position) {
   this.canJumpTo = function(tile) {
     let x = this.position[1]
     let y = this.position[0];
+
+    if (this.king) {
+
+    }
 
     if (this.player === 'player1') {
       if (
@@ -311,16 +340,32 @@ var GameBoard = {
   },
 
   isLegalMove: function(tile, checker){
+    const checkerY = checker.position[0];
+    const checkerX = checker.position[1];
+    const tileY = tile[0];
+    const tileX = tile[1];
+
+    if (checkerX === tileX || checkerY === tileY) {
+      return false;
+    }
+
+    if (checker.king) {
+      const isXChangeValid = checkerX === tileX + 1 || checkerX === tileX - 1;
+      const isYChangeValid = checkerY === tileY + 1 || checkerY === tileY - 1;
+
+      return isYChangeValid && isXChangeValid;
+    }
+
     if (checker.player === 'player1') {
-      if (checker.position[0] > tile[0] &&
-         ((checker.position[1] === tile[1] + 1) ||
-          checker.position[1] === tile[1] -1)) {
+      if (checkerY > tileY &&
+         ((checkerX === tileX + 1) ||
+          checkerX === tileX -1)) {
           return true;
       }
     } else if(checker.player === 'player2'){
-        if(checker.position[0] < tile[0] &&
-          ((checker.position[1] === tile[1] + 1) ||
-           checker.position[1] === tile[1] -1)) {
+        if(checkerY < tileY &&
+          ((checkerX === tileX + 1) ||
+           checkerX === tileX -1)) {
             return true;
           }
       }
@@ -331,6 +376,10 @@ var GameBoard = {
   },
 
   hasEnemy: function(position){
+    if (!this.board[position[0]] || !this.board[position[0]][position[1]]) {
+      return true;
+    }
+
     if (Game.currentPlayer === 'player1') {
       return this.board[position[0]][position[1]] === 2;
     } else {
