@@ -162,7 +162,24 @@ function Checker(color, position) {
     let y = this.position[0];
 
     if (this.king) {
+      // debugger;
+      if (this.player === 'player1') {
+        // check in opposite directions that player 1 normally checks
+        if (
+          (GameBoard.hasEnemy([y + 1, x + 1]) &&
+           y + 2 === tile[0] &&
+           x + 2 === tile[1]) ||
+          (
+           (GameBoard.hasEnemy([y + 1, x - 1]) &&
+            y + 2 === tile[0] &&
+            x - 2 === tile[1])
+           )) {
+            return true;
+          }
 
+      } else if (this.player === 'player2') {
+        // check in opposite directions that player 2 normally checks
+      }
     }
 
     if (this.player === 'player1') {
@@ -175,7 +192,7 @@ function Checker(color, position) {
             y-2 === tile[0] &&
             x+2 === tile[1])
           )
-          ) {
+        ) {
             return true;
       }
     } else if (this.player === 'player2') {
