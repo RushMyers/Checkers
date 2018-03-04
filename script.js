@@ -3,24 +3,25 @@ $(document).ready(function(){
   GameBoard.setCheckers();
 
   $('div').on("click", 'div.checker', function selectChecker(event){ //select which checker to move
-    let checkerElements = Array.from(document.getElementsByClassName('checker'));
     let checkerElement = event.currentTarget;
-    let checker = checkers[checkerElement.dataset.id];
+    let $checkerElement = $(checkerElement);
+    let checker = checkers[$checkerElement.data('id')];
+
     if (Game.currentPlayer === checker.player) {  // make sure checker belongs to player *TODO: export this check
-      checkerElements.forEach(function(checker) { // only one checker can be selected at a time
-        checker.classList.remove('isSelected');
-      });
+      $('.isSelected').removeClass('isSelected') // only one checker at a time can be selected
       checkerElement.classList.add('isSelected');
     }
   });
 
   $('.tile').click(function selectTile(event){ //select tile on which to place checker
+    let selectedChecker = checkers[$('.isSelected').data('id')];
+    let tile = tiles[event.currentTarget.id];
+
     if($('.isSelected').length != 0 && GameBoard.isEmpty(event.currentTarget)) {
-      let selectedChecker = checkers[$('.isSelected').data('id')];
-      if (selectedChecker.canJumpTo(tiles[event.currentTarget.id])){
-        selectedChecker.jump(tiles[event.currentTarget.id]);
+      if (selectedChecker.canJumpTo(tile)){
+        selectedChecker.jump(tile);
       }
-      if(GameBoard.isLegalMove(tiles[event.currentTarget.id], selectedChecker)){
+      if(GameBoard.isLegalMove(tile, selectedChecker)){
         selectedChecker.makeMove(event.currentTarget,$('.isSelected').data('id'))
       }
     }
@@ -42,25 +43,27 @@ function Checker(color, position) {
     let checkerId = $('.isSelected').data('id');
     let tileId = tiles.indexOf(tile);
     let jumpedCheckerIndex = this.getJumpedCheckerIndex(tile);
+    var spotOnBoard = GameBoard.board[this.position[0]][this.position[1]];
     GameBoard.removeChecker(checkers[jumpedCheckerIndex]);
     Game.scorePoint(this.player);
     $("[data-id=" + jumpedCheckerIndex + "]").remove();
     if(this.player === 'player1'){
-      GameBoard.board[this.position[0]][this.position[1]] = 0;
+      spotOnBoard = 0;
       this.position = tile;
-      GameBoard.board[this.position[0]][this.position[1]] = 1;
+      spotOnBoard = 1;
       $('.isSelected').parent().removeClass('red').empty();
       let $newChecker = $('<div/>').addClass('checker red-checker').attr('data-id', checkerId);
       $("#"+tileId +"").append($newChecker);
     } else {
-        GameBoard.board[this.position[0]][this.position[1]] = 0;
+        spotOnBoard = 0;
         this.position = tile;
-        GameBoard.board[this.position[0]][this.position[1]] = 1;
+        spotOnBoard = 2;
         $('.isSelected').parent().removeClass('white').empty();
         let $newChecker = $('<div/>').addClass('checker white-checker').attr('data-id', checkerId);
         $("#"+tileId +"").append($newChecker);
       }
     Game.changeTurns();
+    console.log(GameBoard.board);
   };
   this.makeMove = function(newTile, checkerId) {
     if(this.color === 'red'){
@@ -68,9 +71,8 @@ function Checker(color, position) {
       $('.isSelected').parent().removeClass('red').empty();
       this.position = tiles[newTile.id]; //update position of checker
       GameBoard.board[this.position[0]][this.position[1]] = 1;
-      let $redChecker = document.createElement('div'); // *TODO - change all this to jquery
-      $redChecker.classList.add('checker', 'red-checker');
-      $redChecker.setAttribute('data-id', checkerId);
+      let $redChecker = $('<div/>').addClass('checker red-checker')
+                                    .attr('data-id', checkerId);
       $(newTile).addClass('red').append($redChecker);
       Game.changeTurns();
     }
@@ -79,12 +81,12 @@ function Checker(color, position) {
       $('.isSelected').parent().removeClass('white').empty();
       this.position = tiles[newTile.id];
       GameBoard.board[this.position[0]][this.position[1]] = 2;
-      let $whiteChecker = document.createElement('div'); //*TODO - change all this to jquery
-      $whiteChecker.classList.add('checker', 'white-checker');
-      $whiteChecker.setAttribute('data-id', checkerId);
+      let $whiteChecker = $('<div/>').addClass('checker white-checker')
+                                      .attr('data-id', checkerId);
       $(newTile).addClass('white').append($whiteChecker);
       Game.changeTurns();
     }
+  console.log(GameBoard.board);
   };
   this.canJumpTo = function(tile) {
     let x = this.position[1]
@@ -104,11 +106,8 @@ function Checker(color, position) {
       }
   };
   this.getJumpedCheckerIndex = function(targetTile) {
-    console.log(targetTile, this.position);
     let y = ((targetTile[0] - this.position[0])/2) + this.position[0];
     let x = ((targetTile[1] - this.position[1])/2) + this.position[1];
-    console.log(y,x);
-    console.log(GameBoard.board[y][x]);
     for (checkerIndex in checkers) {
       if(checkers[checkerIndex].position[0] === y && checkers[checkerIndex].position[1] === x) {
         return checkerIndex;
