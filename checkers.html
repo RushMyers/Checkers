@@ -1,33 +1,40 @@
 <html>
   <head>
   <title>Checkers</title>
-  <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Open+Sans" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="style.css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css"/>
   <script src='script.js'></script>
   </head>
   <body>
-    <div class='container text-center'>
+    <div class='container'>
       <div class='page-header'>
-        <h1>Checkers</h1>
+        <h1>Checkers.</h1>
       </div>
     </div>
     <div class="game">
       <div class="board card">
       </div>
-      <div class="score-card card">
-        <ul class="list-group">
-          <li class="list-group-item">P1:
-            <spanclass="score">0</span>
-          </li>
-          <li class="list-group-item">P2:
-            <spanclass="score">0</span>
-          </li>
-        </ul>
-      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Player 1</th>
+            <th scope="col">Player2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <th>
+            <td scope="row">points</td>
+            <td scope="row">points</td>
+          </th>
+        </tbody>
+      </table>
     </div>
-    </div>
+    <footer>
+      made with love by rush
+    </footer>
   </body>
 </html>
