@@ -170,6 +170,10 @@ var Game = {
     } else if (this.player2Score === 12) {
       this.winner = 'player2';
     }
+
+    if (this.isGameOver()) {
+      alert('game over');
+    }
   },
 
   changeTurns: function(){
