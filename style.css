@@ -21,13 +21,7 @@ div.game {
   align-items: center;
   justify-content: space-around;
 }
-div.score-card {
-/*  font-size: 20px;
-  box-shadow: 1px 1px 1px 1px black;
-  border-radius: 2%;*/
-  /*font-size: 2rem;*/
-  /*margin: 1rem;*/
-}
+
 span.score {
   float: right;
   margin-left: 4px;
@@ -43,7 +37,6 @@ div.board {
   background-color: #F9DBBD;
   box-shadow: 3px 4px 3px;
   border: 1rem solid #F9DBBD;
-
 }
 div.tile.dark {
   width: 12%;
@@ -84,8 +77,45 @@ div.tile.light {
 .isSelected {
   box-shadow: 1px 1px 10px 0 #FF7700;
 }
+.checker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.checker .king {
+  font-size: 2em;
+  color: #35FF69;
+}
 footer {
   text-align: right;
   margin: 0 2em 0 2em;
   font-size:14px;
+}
+.score {
+  display: flex;
+  flex-direction: column;
+  height: 13em;
+  width: 1.2em;
+}
+div.won-checker.red{
+  height: 9%;
+  width: 100%;
+  margin: 6% 0 0 1.3em;
+  background: #A30000;
+  border: 1px solid black;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  box-shadow: 1px 1px 2px 0;
+}
+div.won-checker.white{
+  height: 9%;
+  width: 100%;
+  margin: 6% 0 0 1.3em;
+  background: #004777;
+  border: 1px solid black;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  box-shadow: 1px 1px 2px 0;
 }
