@@ -1,6 +1,10 @@
 $(document).ready(function(){
   GameBoard.create();
   GameBoard.setCheckers();
+  function newGame() {
+    //start a new game
+    //zero everything out
+  }
 
   $('div').on("click", 'div.checker', function selectChecker(event){ //select which checker to move
     let checkerElement = event.currentTarget;
@@ -30,6 +34,10 @@ $(document).ready(function(){
       }
     }
   });
+
+  $('.playAgain').click(function playAgain() {
+    newGame();
+  })
 });
 var tiles = [];
 var checkers = [];
@@ -71,6 +79,7 @@ function Checker(color, position) {
 
     GameBoard.removeChecker(checkers[jumpedCheckerIndex]);
     Game.scorePoint(this.player);
+
     $("[data-id=" + jumpedCheckerIndex + "]").remove();
 
     let $newChecker;
@@ -89,18 +98,18 @@ function Checker(color, position) {
       // $("#"+tileId +"").append($newChecker);
       $(`#${tileId}`).append($newChecker);
     } else {
-        GameBoard.board[this.position[0]][this.position[1]] = 0;
-        this.position = tile;
-        GameBoard.board[this.position[0]][this.position[1]] = 2;
+      GameBoard.board[this.position[0]][this.position[1]] = 0;
+      this.position = tile;
+      GameBoard.board[this.position[0]][this.position[1]] = 2;
 
-        $('.isSelected').parent().removeClass('white').empty();
+      $('.isSelected').parent().removeClass('white').empty();
 
-        $newChecker = $('<div/>');
-        $newChecker.addClass('checker white-checker')
-                   .attr('data-id', checkerId);
+      $newChecker = $('<div/>');
+      $newChecker.addClass('checker white-checker')
+                 .attr('data-id', checkerId);
 
-        $(`#${tileId}`).append($newChecker);
-      }
+      $(`#${tileId}`).append($newChecker);
+    }
 
     if (this.canBeKing()) {
       this.makeKing();
@@ -254,7 +263,7 @@ var Game = {
     }
 
     if (this.isGameOver()) {
-      alert('game over');
+      $('#play-again').modal();
     }
   },
 
@@ -265,6 +274,14 @@ var Game = {
 
   scorePoint: function(player){
     player === 'player1' ? this.player1Score ++ : this.player2Score ++ ;
+    this.updateScoreBoard(player);
+  },
+  updateScoreBoard: function(player){
+    if (player === 'player1') {
+      $('.player-1-score').append('<div class="won-checker white"></div>');
+    } else if (player === 'player2') {
+      $('.player-2-score').append('<div class="won-checker red"></div>');
+    }
   }
 };
 

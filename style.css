@@ -104,11 +104,22 @@ footer {
   height: 13em;
   width: 1.2em;
 }
-div.won-checker{
+div.won-checker.red{
   height: 9%;
   width: 100%;
   margin: 6% 0 0 1.3em;
   background: #A30000;
+  border: 1px solid black;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  box-shadow: 1px 1px 2px 0;
+}
+div.won-checker.white{
+  height: 9%;
+  width: 100%;
+  margin: 6% 0 0 1.3em;
+  background: #004777;
   border: 1px solid black;
   -moz-border-radius: 50px;
   -webkit-border-radius: 50px;
