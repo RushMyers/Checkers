@@ -7,7 +7,7 @@ $(document).ready(function(){
     let $checkerElement = $(checkerElement);
     let checker = checkers[$checkerElement.data('id')];
 
-    if (Game.currentPlayer === checker.player) {  // make sure checker belongs to player *TODO: export this check
+    if (Game.currentPlayer === checker.player) {  // make sure checker belongs to player
       $('.isSelected').removeClass('isSelected') // only one checker at a time can be selected
       checkerElement.classList.add('isSelected');
     }
@@ -121,7 +121,8 @@ function Checker(color, position) {
     if (this.color === 'red') {
       GameBoard.board[this.position[0]][this.position[1]] = 0;
       $('.isSelected').parent().removeClass('red').empty();
-      this.position = tiles[newTile.id]; //update position of checker
+      this.position = tiles[newTile.id];
+
       GameBoard.board[this.position[0]][this.position[1]] = 1;
 
       $newChecker = $('<div/>');
@@ -151,7 +152,7 @@ function Checker(color, position) {
 
     if (this.king) {
       this.addKingElement($newChecker);
-    }
+    };
 
     Game.changeTurns();
 
@@ -178,7 +179,18 @@ function Checker(color, position) {
           }
 
       } else if (this.player === 'player2') {
-        // check in opposite directions that player 2 normally checks
+        if (
+            (GameBoard.hasEnemy([y-1, x-1]) &&
+             y-2 === tile[0] &&
+             x-2 === tile[1]) ||
+            (
+             (GameBoard.hasEnemy([y-1, x+1]) &&
+              y-2 === tile[0] &&
+              x+2 === tile[1])
+            )
+          ) {
+        return true;
+        }
       }
     }
 
@@ -193,15 +205,22 @@ function Checker(color, position) {
             x+2 === tile[1])
           )
         ) {
-            return true;
+      return true;
       }
     } else if (this.player === 'player2') {
-      if ((GameBoard.hasEnemy([y+1, x-1]) && y+2 === tile[0] &&
-          x-2 === tile[1]) || ((GameBoard.hasEnemy([y+1, x+1]) &&
-            y+2 === tile[0] && x +2 === tile[1]))) {
-          return true;
-        }
+      if (
+          (GameBoard.hasEnemy([y+1, x-1]) &&
+           y+2 === tile[0] &&
+           x-2 === tile[1]) ||
+          (
+           (GameBoard.hasEnemy([y+1, x+1]) &&
+            y+2 === tile[0] &&
+            x +2 === tile[1])
+           )
+        ) {
+      return true;
       }
+    }
   };
 
   this.getJumpedCheckerIndex = function(targetTile) {

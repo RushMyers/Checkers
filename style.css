@@ -43,7 +43,6 @@ div.board {
   background-color: #F9DBBD;
   box-shadow: 3px 4px 3px;
   border: 1rem solid #F9DBBD;
-
 }
 div.tile.dark {
   width: 12%;
@@ -91,10 +90,28 @@ div.tile.light {
 }
 .checker .king {
   font-size: 2em;
+  box-shadow: 1px 1px 2px 0;
   color: cornflowerblue;
 }
 footer {
   text-align: right;
   margin: 0 2em 0 2em;
   font-size:14px;
+}
+.score {
+  display: flex;
+  flex-direction: column;
+  height: 13em;
+  width: 1.2em;
+}
+div.won-checker{
+  height: 9%;
+  width: 100%;
+  margin: 6% 0 0 1.3em;
+  background: #A30000;
+  border: 1px solid black;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  box-shadow: 1px 1px 2px 0;
 }
