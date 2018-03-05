@@ -172,8 +172,6 @@ function Checker(color, position) {
     let y = this.position[0];
 
     if (this.king) {
-      // debugger;
-      if (this.player === 'player1') {
         // check in opposite directions that player 1 normally checks
         if (
           (GameBoard.hasEnemy([y + 1, x + 1]) &&
@@ -187,7 +185,6 @@ function Checker(color, position) {
             return true;
           }
 
-      } else if (this.player === 'player2') {
         if (
             (GameBoard.hasEnemy([y-1, x-1]) &&
              y-2 === tile[0] &&
@@ -199,7 +196,6 @@ function Checker(color, position) {
             )
           ) {
         return true;
-        }
       }
     }
 
