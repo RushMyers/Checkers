@@ -39,6 +39,7 @@ $(document).ready(function(){
     newGame();
   })
 });
+
 var tiles = [];
 var checkers = [];
 
