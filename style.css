@@ -90,8 +90,7 @@ div.tile.light {
 }
 .checker .king {
   font-size: 2em;
-  box-shadow: 1px 1px 2px 0;
-  color: cornflowerblue;
+  color: #35FF69;
 }
 footer {
   text-align: right;

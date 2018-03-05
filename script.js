@@ -6,18 +6,22 @@ $(document).ready(function(){
     //zero everything out
   }
 
-  $('div').on("click", 'div.checker', function selectChecker(event){ //select which checker to move
+  //select which checker to move
+  $('div').on("click", 'div.checker', function selectChecker(event){
     let checkerElement = event.currentTarget;
     let $checkerElement = $(checkerElement);
     let checker = checkers[$checkerElement.data('id')];
 
-    if (Game.currentPlayer === checker.player) {  // make sure checker belongs to player
-      $('.isSelected').removeClass('isSelected') // only one checker at a time can be selected
+    // make sure checker belongs to player
+    if (Game.currentPlayer === checker.player) {
+    // only one checker at a time can be selected
+      $('.isSelected').removeClass('isSelected')
       checkerElement.classList.add('isSelected');
     }
   });
 
-  $('.tile').click(function selectTile(event){ //select tile on which to place checker
+  //select tile on which to place checker
+  $('.tile').click(function selectTile(event){
     if (Game.isGameOver()) {
       return;
     };
