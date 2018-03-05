@@ -1,10 +1,6 @@
 $(document).ready(function(){
   GameBoard.create();
   GameBoard.setCheckers();
-  function newGame() {
-    //start a new game
-    //zero everything out
-  }
 
   //select which checker to move
   $('div').on("click", 'div.checker', function selectChecker(event){
@@ -55,9 +51,6 @@ function Checker(color, position) {
 
   this.makeKing = function() {
     this.king = true;
-    // const $checkerElement = $('.isSelected');
-    // $checkerElement.append("<i class='fas fa-chess-king'></i>");
-    // this.addKingElement($checkerElement);
   };
 
   this.canBeKing = function() {
@@ -99,7 +92,6 @@ function Checker(color, position) {
       $newChecker.addClass('checker red-checker')
                  .attr('data-id', checkerId);
 
-      // $("#"+tileId +"").append($newChecker);
       $(`#${tileId}`).append($newChecker);
     } else {
       GameBoard.board[this.position[0]][this.position[1]] = 0;
@@ -176,7 +168,6 @@ function Checker(color, position) {
     let y = this.position[0];
 
     if (this.king) {
-        // check in opposite directions that player 1 normally checks
         if (
           (GameBoard.hasEnemy([y + 1, x + 1]) &&
            y + 2 === tile[0] &&
@@ -263,7 +254,15 @@ var Game = {
     }
 
     if (this.isGameOver()) {
-      $('#play-again').modal();
+      if (this.currentPlayer === 'player1') {
+        if (window.confirm('Player one wins! Play again?')) {
+          this.newGame();
+        }
+      } else if (this.currentPlayer === 'player2') {
+        if (window.confirm('Player two wins! Play again?')) {
+          this.newGame();
+        }
+      }
     }
   },
 
@@ -276,12 +275,17 @@ var Game = {
     player === 'player1' ? this.player1Score ++ : this.player2Score ++ ;
     this.updateScoreBoard(player);
   },
+
   updateScoreBoard: function(player){
     if (player === 'player1') {
       $('.player-1-score').append('<div class="won-checker white"></div>');
     } else if (player === 'player2') {
       $('.player-2-score').append('<div class="won-checker red"></div>');
     }
+  },
+
+  newGame: function(){
+   location.reload();
   }
 };
 
@@ -306,12 +310,11 @@ var GameBoard = {
     let checkerNo = 0;
 
     const $board = $('.board');
-
-    this.board.forEach(function(row, i) { //creates all the dark and light squares based off board array
+    //creates all the dark and light squares based off board array
+    this.board.forEach(function(row, i) {
       row.forEach(function(column, j) {
         if (i % 2 === 0) {
           if (j % 2 === 1 && column == 2) {
-            // $('.board').append("<div class='tile dark white' id="+tileNo+"></div>");
             $board.append(`<div class="tile dark white" id="${tileNo}" pos="${i}, ${j}"></div>`);
 
             tiles[tileNo] = [i, j];
@@ -320,7 +323,6 @@ var GameBoard = {
             checkers[checkerNo] = new Checker('white', [i, j]);
             checkerNo++
           } else if(j % 2 === 1 && column == 1){
-              // $board.append("<div class='tile dark red' id="+tileNo+"></div>");
               $board.append(`<div class="tile dark red" id="${tileNo}" pos="${i}, ${j}"></div>`);
 
               tiles[tileNo] = [i, j];
@@ -329,13 +331,11 @@ var GameBoard = {
               checkers[checkerNo] = new Checker('red', [i, j]);
               checkerNo++;
           } else if(j % 2 === 1){
-              // $board.append("<div class='tile dark' id="+tileNo+"></div>");
               $board.append(`<div class="tile dark" id="${tileNo}" pos="${i}, ${j}"></div>`);
 
               tiles[tileNo] = [i, j];
               tileNo++;
           } else if(j % 2 === 0){
-              // $board.append("<div class='tile light' id="+tileNo+"></div>");
               $board.append(`<div class="tile light" id="${tileNo}" pos="${i}, ${j}"></div>`);
 
               tiles[tileNo] = [i, j];
@@ -343,7 +343,6 @@ var GameBoard = {
           }
         } if (i % 2 === 1) {
             if(j % 2 === 0 && column === 2 ) {
-              // $board.append("<div class='tile dark white' id="+tileNo+"></div>");
               $board.append(`<div class="tile dark white" id="${tileNo}" pos="${i}, ${j}"></div>`);
 
               tiles[tileNo] = [i, j];
@@ -352,7 +351,6 @@ var GameBoard = {
               checkers[checkerNo] = new Checker('white', [i, j]);
               checkerNo++;
             } else if(j%2===0 && column === 1) {
-                // $('.board').append("<div class='tile dark red' id="+tileNo+"></div>");
                 $board.append(`<div class="tile dark red" id="${tileNo}" pos="${i}, ${j}"></div>`);
 
                 tiles[tileNo] = [i, j];
@@ -361,13 +359,11 @@ var GameBoard = {
                 checkers[checkerNo] = new Checker('red', [i, j]);
                 checkerNo++;
             } else if(j%2===0) {
-                // $('.board').append("<div class='tile dark' id="+tileNo+"></div>");
                 $board.append(`<div class="tile dark" id="${tileNo}" pos="${i}, ${j}"></div>`);
 
                 tiles[tileNo] = [i, j];
                 tileNo++;
             } else if(j%2 === 1){
-                // $('.board').append("<div class='tile light' id="+tileNo+"></div>");
                 $board.append(`<div class="tile light" id="${tileNo}" pos="${i}, ${j}"></div>`);
 
                 tiles[tileNo] = [i, j];
@@ -376,8 +372,8 @@ var GameBoard = {
         }
       });
     });
-
-    let $whiteChecker = $("<div/>").addClass("checker white-checker"); //create checkers
+    //create checkers
+    let $whiteChecker = $("<div/>").addClass("checker white-checker");
     let $redChecker = $("<div/>").addClass("checker red-checker");
 
     $('.white').append($whiteChecker);

@@ -21,13 +21,7 @@ div.game {
   align-items: center;
   justify-content: space-around;
 }
-div.score-card {
-/*  font-size: 20px;
-  box-shadow: 1px 1px 1px 1px black;
-  border-radius: 2%;*/
-  /*font-size: 2rem;*/
-  /*margin: 1rem;*/
-}
+
 span.score {
   float: right;
   margin-left: 4px;
